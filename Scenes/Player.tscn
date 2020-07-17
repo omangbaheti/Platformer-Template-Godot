@@ -1,0 +1,93 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/AstroWalk2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/AstroWalk4.png" type="Texture" id=2]
+[ext_resource path="res://Assets/AstroWalk5.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Idle2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Jump1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Idle1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Jump3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/AstroWalk1.png" type="Texture" id=9]
+[ext_resource path="res://Assets/AstroWalk3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/AstroWalk6.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Jump2.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Player.png" type="Texture" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 19 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1.03526, 0.615572 ),
+"update": 1,
+"values": [ ExtResource( 7 ), ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Jump"
+loop = true
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.333333, 0.666667, 1 ),
+"transitions": PoolRealArray( 1, 3.24901, 4.43828 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 12 ), ExtResource( 8 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 2.2974, 3.13834, 1.6245, 4.43827 ),
+"update": 0,
+"values": [ ExtResource( 9 ), ExtResource( 1 ), ExtResource( 10 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 11 ) ]
+}
+
+[node name="Player" type="RigidBody2D"]
+collision_mask = 3
+mode = 2
+gravity_scale = 128.0
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.0626736, -0.391788 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0659699, -0.893906 )
+scale = Vector2( 1.27625, 1.24966 )
+texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
+anims/Jump = SubResource( 3 )
+anims/Walk = SubResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]

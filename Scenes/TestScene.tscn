@@ -1,0 +1,133 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Player.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.85818, 15.9966 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 329.866, 216.072 )
+scale = Vector2( 1.00111, 1 )
+collision_mask = 2
+gravity_scale = 20.0
+can_sleep = false
+MovementCurve = SubResource( 1 )
+MovementDecayCurve = SubResource( 2 )
+MovementSpeed = 200
+JumpForce = 500.0
+AirControl = true
+ShouldBolt = true
+
+[node name="CurveValue" type="Label" parent="Player"]
+margin_left = -24.6696
+margin_top = -57.0668
+margin_right = 108.33
+margin_bottom = -43.0668
+text = "Curve Value"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DecayValue" type="Label" parent="Player"]
+margin_left = -23.5473
+margin_top = -39.5279
+margin_right = 109.453
+margin_bottom = -25.5279
+text = "Decay Value"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementTimer" type="Label" parent="Player"]
+margin_left = -25.1216
+margin_top = -123.466
+margin_right = 107.878
+margin_bottom = -109.466
+text = "Movement Timer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move DIrection" type="Label" parent="Player"]
+margin_left = -25.7237
+margin_top = -105.917
+margin_right = 107.276
+margin_bottom = -91.9174
+text = "Move Direction"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Direction Change" type="Label" parent="Player"]
+margin_left = -25.74
+margin_top = -89.1874
+margin_right = 107.26
+margin_bottom = -75.1874
+text = "Direction Change"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dir" type="Label" parent="Player"]
+margin_left = -25.5058
+margin_top = -72.9092
+margin_right = 107.494
+margin_bottom = -58.9092
+text = "Dir"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrevDir" type="Label" parent="Player"]
+margin_left = -22.7321
+margin_top = -143.486
+margin_right = 138.268
+margin_bottom = -129.486
+text = "PrevDir"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Walk" type="Label" parent="Player"]
+margin_left = -22.3139
+margin_top = -161.353
+margin_right = 132.686
+margin_bottom = -147.353
+text = "Walk"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bolt" type="Label" parent="Player"]
+margin_left = -25.1819
+margin_top = -177.132
+margin_right = 46.8181
+margin_bottom = -163.132
+text = "Not Bolting"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 254.795, 268.975 )
+rotation = 1.5708
+scale = Vector2( 1, 100 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -0.230835, -0.153889 )
+shape = SubResource( 3 )
