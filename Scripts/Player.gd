@@ -65,8 +65,8 @@ func _physics_process(delta):
 	$Dir.text = "Dir:"+str(dir)
 	$PrevDir.text = "PrevDir:" + str(PrevDir)
 	
-	if MoveDirection.x!=0:
-		if PrevDir != MoveDirection.x:
+	if MoveDirection.x != 0:
+		if MoveDirection.x*(-1) == PrevDir:
 			DirectionHasChanged = true
 #			print("DIrection changed")
 		
@@ -84,6 +84,7 @@ func _physics_process(delta):
 			if MovementTimer == 0:
 				DirectionHasChanged = false
 				comingFromDirectionChange = true
+				$"Label".text = "comingFromDirectionChange: true"
 				MovementTimer += delta
 		
 		else:
@@ -108,16 +109,18 @@ func _physics_process(delta):
 		
 		if linear_velocity.length_squared() < 0.1:
 			comingFromDirectionChange = false
+			$"Label".text = "comingFromDirectionChange: false"
 			DirectionHasChanged =  false
 			PrevDir = 0
 		dir = Vector2(CurveValue*sign(linear_velocity.x),MoveDirection.y) if linear_velocity.x != 0 else MoveDirection
 		$Dir.text = "Dir:"+str(dir)
+	
 	if linear_velocity.y < 0:
 		linear_velocity += Vector2.UP * gravity_scale * (FallMultiplier - 1 ) * delta
 	elif linear_velocity.y > 0:
 		linear_velocity += Vector2.UP * gravity_scale * (LowJumpMultiplier - 1 ) * delta
 	
-	if AirControl and not IsOnGround:
+	if not AirControl and not IsOnGround:
 		pass
 	else:
 		Walk(dir)
